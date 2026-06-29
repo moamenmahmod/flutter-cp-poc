@@ -5,16 +5,13 @@ on:
 
 jobs:
   cherry-pick:
-    if: contains(github.event.pull_request.labels.*.name, 'cp: beta')
+    if: "${{ github.event.label.name == 'cp: beta' }}"
     runs-on: ubuntu-latest
     steps:
       - name: Create PR on CP success
         env:
-          # Simulating the secret being exposed in the environment
           GITHUB_TOKEN: ${{ secrets.FLUTTERACTIONSBOT_CP_TOKEN }}
           PR_TITLE: ${{ github.event.pull_request.title }}
           CHANNEL: "beta"
         run: |
-          # We use 'echo' instead of 'gh pr create' to avoid needing actual gh auth,
-          # but the shell injection executes BEFORE 'echo' runs.
           echo "Attempting to create PR with title: [CP-${CHANNEL}]${PR_TITLE}"
