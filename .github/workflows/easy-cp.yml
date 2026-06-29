@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Create PR on CP success
         env:
-          GITHUB_TOKEN: ${{ secrets.FLUTTERACTIONSBOT_CP_TOKEN }}
+          FLUTTERACTIONSBOT_CP_TOKEN: ${{ secrets.FLUTTERACTIONSBOT_CP_TOKEN }}
           PR_TITLE: ${{ github.event.pull_request.title }}
           CHANNEL: "beta"
         run: |
